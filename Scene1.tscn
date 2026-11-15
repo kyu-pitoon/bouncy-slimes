@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dd27a8j7o4na8" path="res://red_slime.gd" id="7_5xdti"]
 [ext_resource type="AudioStream" uid="uid://bvm4md6gpvrrg" path="res://slime_bounce.mp3" id="7_otot6"]
 [ext_resource type="AudioStream" uid="uid://da65rgogivmq7" path="res://bg_music.mp3" id="8_otot6"]
+[ext_resource type="Script" uid="uid://cdwwix43vjg2k" path="res://red_gem.gd" id="9_0wmgr"]
 [ext_resource type="Script" uid="uid://bmiofldf1i04l" path="res://gems.gd" id="9_ehxob"]
 [ext_resource type="Texture2D" uid="uid://ddn5xx8xy0lng" path="res://redgem.png" id="10_3q4dw"]
 [ext_resource type="Texture2D" uid="uid://dou3rklw6wmdr" path="res://bluegem.png" id="11_3q4dw"]
@@ -1665,7 +1666,7 @@ autoplay = true
 
 [node name="RedGem" type="Area2D" parent="." unique_id=2040024168]
 position = Vector2(-146, 174)
-script = ExtResource("9_ehxob")
+script = ExtResource("9_0wmgr")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="RedGem" unique_id=1925113253]
