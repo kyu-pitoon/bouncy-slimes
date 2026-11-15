@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)https://dotpict.net/en/works/6041179 -->
+<html lang="en" style="background-color: rgb(33, 34, 37);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <!--<base href="/">--><base href=".">
+
+  
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="dotpictはドット絵好きのためのコミュニティサイトです！dotpictでドット絵を作ることもできます！">
+  <meta name="keywords" content="ドット絵,ドットピクト,dotpict,アニメーション,ドット,パレット,イラスト,illustration,pixelart">
+
+  <!-- OGP -->
+  <meta property="og:title" content="[16x16] GB gem">
+  <meta property="og:description" content="[16x16] GB gem - AKskylark">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="dotpict">
+  <meta property="twitter:description" content="dotpictはドット絵好きのためのコミュニティサイトです！dotpictでドット絵を作ることもできます！">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="dotpict">
+  <link rel="apple-touch-icon" href="https://dotpict.net/icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://dotpict.net/favicon.png">
+
+  <title>[16x16] GB gem by AKskylark - Pixel Art | dotpict</title>
+  <link rel="manifest" href="https://dotpict.net/manifest.json">
+  <!-- 起動中に接続する先へ、HTML を読んだ時点で接続しておく。www.gstatic.com は描画エンジン（skwasm / CanvasKit）と Firebase の JS、
+       fonts.gstatic.com は描画エンジンが読む Roboto、api / img は最初の画面のすぐあとに読む API と作品画像。
+       どれも fetch / import の CORS（認証情報なし）で読むので、同じ接続を使えるよう crossorigin を付ける -->
+  <link rel="preconnect" href="https://www.gstatic.com/" crossorigin="">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link rel="preconnect" href="https://api.dotpicko.net/" crossorigin="">
+  <link rel="preconnect" href="https://img.dotpicko.net/" crossorigin="">
+  <!-- Firebase の JS は、アプリ本体が動き出してから firebase-app.js → firebase-auth.js / firebase-analytics.js の順に import される。
+       その順番待ちをなくすため、アプリ本体と並べて先に読む。版は firebase_core_web の supportedFirebaseJsSdkVersion
+       （pubspec.lock の firebase_core_web の lib/src/firebase_sdk_version.dart）と同じにする。ずれると先読みが無駄になるだけで、動きは変わらない -->
+  <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js">
+  <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js">
+  <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- 最初のページも含め、ページを送るのは FirebaseAnalyticsService.logScreenView だけにする。ここで config を呼ぶと最初のページが2回数えられる -->
+  <script type="text/javascript" async="" src="./gem_files/js"></script><script type="text/javascript" async="" src="./gem_files/js(1)"></script><script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <!-- gtag.js は、最初の画面を出すまでの通信と取り合わないよう、最初の画面のあと（下の flutter-first-frame）に読む。
+       それまでの gtag() の呼び出しは dataLayer に積まれ、読み込んだ gtag.js が順に送る。
+       firebase-analytics（G-5HDGVRC5N4）は、URL に dataLayer を含む gtag.js の script がページにあると自分では gtag.js を読まず、
+       無ければ G-5HDGVRC5N4 用にもう1本読む（firebase JS SDK の findGtagScriptOnPage）。gtag.js は1本あれば dataLayer の全 ID を送るので、
+       もう1本読ませないよう、type を text/plain にして読み込まない形で先に置き、最初の画面のあとに同じ URL の script に差し替える -->
+  <script async="" src="./gem_files/js(2)"></script>
+  <script>
+    window.addEventListener('flutter-first-frame', () => {
+      const placeholder = document.getElementById('dp-gtag');
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = placeholder.src;
+      placeholder.replaceWith(script);
+    }, { once: true });
+  </script>
+  <script>
+    // Firebase Auth を、ポップアップとリダイレクトのログイン用の部品（browserPopupRedirectResolver）なしで初期化させる。ログインはメールとパスワードだけで使わない。
+    // firebase_auth_web は initializeAuth にこの部品を渡す。部品があると、スマホと Safari では初期化のたびに apis.google.com の gapi と
+    // firebaseapp.com の iframe を読み終えるまでログイン状態の復元を待ち（firebase JS SDK の _shouldInitProactively）、
+    // main.dart の Firebase.initializeApp がその復元を待つので、最初の画面がその分遅れる。
+    // firebase_core_web は読み込んだ firebase-auth.js を window.firebase_auth に入れ、firebase_auth_web はそこから initializeAuth を呼ぶので、
+    // 入れるときに initializeAuth だけ差し替える。ログイン状態の保存先（persistence）はそのまま渡す。
+    // firebase_auth_web を上げるときは、initializeAuth を呼んだままか（getAuth( に変わっていないか）確かめる。getAuth はここを通らず
+    // 部品ありで初期化するので、この差し替えが黙って効かなくなる。getAuth のあとに initializeAuth も呼ぶ形だと options がずれて
+    // auth/already-initialized になり、Firebase.initializeApp が失敗する
+    {
+      let firebaseAuth;
+      Object.defineProperty(window, 'firebase_auth', {
+        configurable: true,
+        get: () => firebaseAuth,
+        set(module) {
+          firebaseAuth = new Proxy(module, {
+            get(target, key) {
+              if (key !== 'initializeAuth') return Reflect.get(target, key);
+              return (app, options) => {
+                const { popupRedirectResolver, ...rest } = options;
+                return target.initializeAuth(app, rest);
+              };
+            },
+          });
+        },
+      });
+    }
+  </script>
+  <!-- エンジンは起動時にこれと同じ値で付け直す。読み込み中のスマホで起動画面が縮小表示されないよう、最初から入れておく -->
+  
+  <script>
+    // Flutter への切り替えで色がちらつかないよう、SettingServiceImpl.themeMode の既定値 dark と
+    // shared_preferences が flutter.theme_mode に JSON で保存する値、main.dart の ?isNightMode、
+    // RootPage の背景に使う colorScheme.mono00（packages/core/lib/theme/dp_colors.dart）に合わせる。
+    // 後から読み込む flutter_bootstrap.js の宣言と名前がぶつからないよう、ブロックの中に閉じ込める。
+    {
+      let dark = true;
+      let stored = null;
+      // サイトデータの保存を禁止した環境では localStorage に触れるだけで例外になるので、そのときは既定値を使う。
+      try {
+        stored = localStorage.getItem('flutter.theme_mode');
+      } catch (e) {}
+      const mode = stored === null ? 'dark' : JSON.parse(stored);
+      if (mode === 'light') dark = false;
+      else if (mode === 'system') dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (new URLSearchParams(location.search).get('isNightMode') === 'true') dark = true;
+      document.documentElement.style.backgroundColor = dark ? '#212225' : '#FFFFFF';
+    }
+  </script>
+  <style>
+    #dp-splash { position: fixed; top: 0; right: 0; bottom: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    #dp-splash img { width: 144px; height: 144px; }
+    #dp-splash canvas { width: 32px; height: 32px; }
+  </style>
+<link rel="modulepreload" href="https://dotpict.net/main.dart.mjs"><link rel="preload" as="fetch" crossorigin="anonymous" href="https://dotpict.net/main.dart.wasm"><link rel="preload" as="fetch" crossorigin="anonymous" href="https://dotpict.net/assets/FontManifest.json"><link rel="preload" as="fetch" crossorigin="anonymous" href="https://dotpict.net/assets/packages/dotpict_core/assets/fonts/Murecho.ttf"><link rel="preload" as="fetch" crossorigin="anonymous" href="https://dotpict.net/assets/packages/dotpict_core/assets/fonts/mg02_bmp8.ttf"><link rel="preload" as="fetch" crossorigin="anonymous" href="https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2"><meta name="generator" content="Flutter"><meta flt-viewport="" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0"><script type="text/javascript" crossorigin="anonymous">            window.ff_trigger_firebase_core = async (callback) => {
+              console.debug("Initializing Firebase firebase_core");
+              callback(await import("https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js"));
+            };
+          </script><script type="text/javascript" crossorigin="anonymous">            window.ff_trigger_firebase_analytics = async (callback) => {
+              console.debug("Initializing Firebase firebase_analytics");
+              callback(await import("https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js"));
+            };
+          </script><script type="text/javascript" crossorigin="anonymous">            window.ff_trigger_firebase_auth = async (callback) => {
+              console.debug("Initializing Firebase firebase_auth");
+              callback(await import("https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js"));
+            };
+          </script><meta property="og:image" content="https://thumbnail.dotpicko.net/3SMUQXuOQEZpzWL9W1ohdhUVl8Wk_28UH1jcnFM_eGQ/rs:force:1280:1280:1/plain/path:///work/2026/05/17/07/05/2c7044793b0b87275612301e9622b59f856e4ec7e70c35d0b573d345ded730bc.png@png"><meta name="twitter:title" content="[16x16] GB gem"><meta name="twitter:description" content="[16x16] GB gem - AKskylark"><meta name="twitter:image" content="https://thumbnail.dotpicko.net/3SMUQXuOQEZpzWL9W1ohdhUVl8Wk_28UH1jcnFM_eGQ/rs:force:1280:1280:1/plain/path:///work/2026/05/17/07/05/2c7044793b0b87275612301e9622b59f856e4ec7e70c35d0b573d345ded730bc.png@png"><style></style></head>
+<body flt-embedding="full-page" flt-renderer="skwasm" flt-build-mode="release" spellcheck="false" style="position: fixed; inset: 0px; overflow: hidden; padding: 0px; margin: 0px; user-select: none; touch-action: none;"><flt-semantics-placeholder role="button" aria-live="polite" tabindex="0" aria-label="Enable accessibility" style="position: absolute; left: -1px; top: -1px; width: 1px; height: 1px;"></flt-semantics-placeholder>
+  
+  <script>
+    // 後から読み込む flutter_bootstrap.js の宣言と名前がぶつからないよう、ブロックの中に閉じ込める。
+    {
+      // アプリ内の DPCircularProgressIndicator（packages/core/lib/widgets/dp_circular_progress_indicator.dart の
+      // _frameCount / _frameDuration）と見た目や速度を揃えるため、同じ8枚を100ms間隔で使う。
+      const frames = [];
+      for (let n = 1; n <= 8; n++) {
+        const img = new Image();
+        img.src = `assets/packages/dotpict_core/assets/images/circular_progress_indicator${n}.png`;
+        frames.push(img);
+      }
+      const canvas = document.getElementById('dp-splash-spinner');
+      canvas.width = canvas.height = Math.round(32 * window.devicePixelRatio);
+      const ctx = canvas.getContext('2d');
+      let frame = 0;
+      const timer = setInterval(() => {
+        const img = frames[frame];
+        frame = (frame + 1) % frames.length;
+        if (img.complete && img.naturalWidth > 0) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          // FilterQuality.none と Image.asset(color: lightGray)（dp_colors.dart）の srcIn に合わせ、ドットの輪郭と色を保つ。
+          ctx.imageSmoothingEnabled = false;
+          ctx.globalCompositeOperation = 'source-over';
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          ctx.globalCompositeOperation = 'source-in';
+          ctx.fillStyle = '#ABB4C6';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+      }, 100);
+      // Flutter Web エンジンが初回描画後に window へ送るイベントを待ち、表示の空白を防ぐ。
+      // イベントは描画が画面に出る前に届くことがある（skwasm は描画を非同期に仕上げる）ので、2フレーム待ってから消す。
+      // Flutter の画面は起動画面より上に重なるので、描かれた後まで起動画面が残っていても見た目には出ない。
+      window.addEventListener('flutter-first-frame', () => {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          clearInterval(timer);
+          document.getElementById('dp-splash').remove();
+        }));
+      }, { once: true });
+    }
+  </script>
+  <!-- flutter_bootstrap.js を別に取りに行く往復をなくすため、ビルド時に flutter_tools が中身をここへ埋め込む。
+       この HTML のほかの場所（コメントの中も）に二重の波かっこで囲んだ名前を書くと、そこも置き換えられる -->
+  <script>
+    (()=>{var T={blink:!0,gecko:!1,webkit:!1,unknown:!1},K=()=>navigator.vendor==="Google Inc."||navigator.userAgent.includes("Edg/")?"blink":navigator.vendor==="Apple Computer, Inc."?"webkit":navigator.vendor===""&&navigator.userAgent.includes("Firefox")?"gecko":"unknown",W=K(),B=()=>typeof ImageDecoder>"u"?!1:W==="blink",$=()=>typeof Intl.v8BreakIterator<"u"&&typeof Intl.Segmenter<"u",F=()=>typeof window.TextCluster<"u",O=()=>{let n=[0,97,115,109,1,0,0,0,1,5,1,95,1,120,0];return WebAssembly.validate(new Uint8Array(n))},M=()=>{let n=document.createElement("canvas");return n.width=1,n.height=1,n.getContext("webgl2")!=null?2:n.getContext("webgl")!=null?1:-1},H=()=>window.chrome&&chrome.runtime&&chrome.runtime.id,h={browserEngine:W,hasImageCodecs:B(),hasChromiumBreakIterators:$(),hasTextCluster:F(),supportsWasmGC:O(),crossOriginIsolated:window.crossOriginIsolated,webGLVersion:M(),isChromeExtension:H()};function m(...n){return new URL(E(...n),document.baseURI).toString()}function E(...n){return n.filter(e=>!!e).map((e,s)=>s===0?_(e):G(_(e))).filter(e=>e.length).join("/")}function G(n){let e=0;for(;e<n.length&&n.charAt(e)==="/";)e++;return n.substring(e)}function _(n){let e=n.length;for(;e>0&&n.charAt(e-1)==="/";)e--;return n.substring(0,e)}function I(n,e){return n.canvasKitBaseUrl?n.canvasKitBaseUrl:e.engineRevision&&!e.useLocalCanvasKit?E("https://www.gstatic.com/flutter-canvaskit",e.engineRevision):"canvaskit"}var v=class{constructor(){this._scriptLoaded=!1}setTrustedTypesPolicy(e){this._ttPolicy=e}async loadEntrypoint(e){let{entrypointUrl:s=m("main.dart.js"),onEntrypointLoaded:t,nonce:r}=e||{};return this._loadJSEntrypoint(s,t,r)}async load(e,s,t,r,i){i??=c=>{c.initializeEngine(t).then(a=>a.runApp())};let{entrypointBaseUrl:o}=t,{entryPointBaseUrl:l}=t;if(!o&&l&&(console.warn("[deprecated] `entryPointBaseUrl` is deprecated and will be removed in a future release. Use `entrypointBaseUrl` instead."),o=l),e.compileTarget==="dart2wasm")return this._loadWasmEntrypoint(e,s,o,i,t?.wasmDeferredModulesLoader);{let c=e.mainJsPath??"main.dart.js",a=m(o,c);return this._loadJSEntrypoint(a,i,r)}}didCreateEngineInitializer(e){typeof this._didCreateEngineInitializerResolve=="function"&&(this._didCreateEngineInitializerResolve(e),this._didCreateEngineInitializerResolve=null,delete _flutter.loader.didCreateEngineInitializer),typeof this._onEntrypointLoaded=="function"&&this._onEntrypointLoaded(e)}_loadJSEntrypoint(e,s,t){let r=typeof s=="function";if(!this._scriptLoaded){this._scriptLoaded=!0;let i=this._createScriptTag(e,t);if(r)console.debug("Injecting <script> tag. Using callback."),this._onEntrypointLoaded=s,document.head.append(i);else return new Promise((o,l)=>{console.debug("Injecting <script> tag. Using Promises. Use the callback approach instead!"),this._didCreateEngineInitializerResolve=o,i.addEventListener("error",l),document.head.append(i)})}}async _loadWasmEntrypoint(e,s,t,r,i){if(!this._scriptLoaded){this._scriptLoaded=!0,this._onEntrypointLoaded=r;let{mainWasmPath:o,jsSupportRuntimePath:l}=e,c=m(t,o),a=m(t,l);this._ttPolicy!=null&&(a=this._ttPolicy.createScriptURL(a));let d=(await import(a)).compileStreaming(fetch(c)),w;e.renderer==="skwasm"?w=(async()=>{let g=await s.skwasm;return window._flutter_skwasmInstance=g,{skwasm:g.wasmExports,skwasmWrapper:g,ffi:{memory:g.wasmMemory}}})():w=Promise.resolve({});let f=await d,p=(g,R)=>Promise.all(g.map(L=>fetch(m(t,L)).then(j=>R(L,j))));await(await f.instantiate(await w,{loadDeferredModules:i||p})).invokeMain()}}_createScriptTag(e,s){let t=document.createElement("script");t.type="application/javascript",s&&(t.nonce=s);let r=e;return this._ttPolicy!=null&&(r=this._ttPolicy.createScriptURL(e)),t.src=r,t}};async function U(n,e,s){if(e<0)return n;let t,r=new Promise((i,o)=>{t=setTimeout(()=>{o(new Error(`${s} took more than ${e}ms to resolve. Moving on.`,{cause:U}))},e)});return Promise.race([n,r]).finally(()=>{clearTimeout(t)})}var y=class{setTrustedTypesPolicy(e){this._ttPolicy=e}loadServiceWorker(e){if(!e||!("serviceWorker"in navigator))return Promise.resolve();let s=()=>{console.warn(`Loading the service worker using Flutter bootstrap is deprecated and will stop working in a future release.
+For more details, see: https://github.com/flutter/flutter/issues/156910`)},t=()=>{let{serviceWorkerVersion:r,serviceWorkerUrl:i=m(`flutter_service_worker.js?v=${r}`),timeoutMillis:o=4e3}=e,l=i;this._ttPolicy!=null&&(l=this._ttPolicy.createScriptURL(l));let c=navigator.serviceWorker.register(l).then(a=>this._getNewServiceWorker(a,r)).then(this._waitForServiceWorkerActivation);return U(c,o,"prepareServiceWorker")};return e.serviceWorkerUrl!=null?(s(),t()):navigator.serviceWorker.getRegistration().then(r=>r?t():Promise.resolve())}async _getNewServiceWorker(e,s){if(!e.active&&(e.installing||e.waiting))return console.debug("Installing/Activating first service worker."),e.installing||e.waiting;if(e.active.scriptURL.endsWith(s))return console.debug("Loading from existing service worker."),e.active;{let t=await e.update();return console.debug("Updating service worker."),t.installing||t.waiting||t.active}}async _waitForServiceWorkerActivation(e){if(!e||e.state==="activated")if(e){console.debug("Service worker already active.");return}else throw new Error("Cannot activate a null service worker!");return new Promise((s,t)=>{e.addEventListener("statechange",()=>{e.state==="activated"&&(console.debug("Activated new service worker."),s())})})}};var b=class{constructor(e,s="flutter-js"){let t=e||[/\.js$/,/\.mjs$/];window.trustedTypes&&(this.policy=trustedTypes.createPolicy(s,{createScriptURL:function(r){if(r.startsWith("blob:"))return r;let i=new URL(r,window.location),o=i.pathname.split("/").pop();if(t.some(c=>c.test(o)))return i.toString();console.error("URL rejected by TrustedTypes policy",s,":",r,"(download prevented)")}}))}};var k=(n,e)=>{let s=window._flutter?.buildConfig?.wasmHashes,t=s?.[e];if(!t&&e.includes("/")){let c=e.split("/").pop();t=s?.[c]}let r="crossOriginStorage"in navigator&&"requestFileHandles"in navigator.crossOriginStorage;r&&console.log("Cross-Origin Storage is supported. See https://wicg.github.io/cross-origin-storage/ for more details.");let i=async c=>{let a={algorithm:"SHA-256",value:c};try{let[u]=await navigator.crossOriginStorage.requestFileHandles([a]),d=await u.getFile();return new Response(d,{headers:{"Content-Type":"application/wasm"}})}catch(u){u.name==="NotAllowedError"?console.warn(`Not allowed to retrieve ${e} (hash: ${c}).`):u.name!=="NotFoundError"&&console.warn(`Unexpected error during retrieval of ${e} (hash: ${c}).`,u)}},o=async()=>{if(r&&t){let a=await i(t);if(a)return a}let c=await fetch(n);if(r&&t&&c.ok){let a={algorithm:"SHA-256",value:t},u=c.clone();(async()=>{try{let d=await u.blob(),[w]=await navigator.crossOriginStorage.requestFileHandles([a],{create:!0}),f=await w.createWritable();await f.write(d),await f.close()}catch(d){console.warn(`Error storing ${e} (hash: ${t}):`,d)}})()}return c},l=WebAssembly.compileStreaming(o());return(c,a)=>((async()=>{let u=await l,d=await WebAssembly.instantiate(u,c);a(d,u)})(),{})};var P=(n,e,s,t)=>(window.flutterCanvasKitLoaded=(async()=>{if(window.flutterCanvasKit)return window.flutterCanvasKit;let r=s.hasChromiumBreakIterators&&s.hasImageCodecs;if(!r&&e.canvasKitVariant=="chromium")throw"Chromium CanvasKit variant specifically requested, but unsupported in this browser";let i=r&&e.canvasKitVariant!=="full",o=i&&e.preferWebParagraph&&s.hasTextCluster,l=t;o?l=m(l,"webparagraph"):i&&(l=m(l,"chromium"));let c=m(l,"canvaskit.js");n.flutterTT.policy&&(c=n.flutterTT.policy.createScriptURL(c));let a="canvaskit.wasm";o?a="webparagraph/canvaskit.wasm":i&&(a="chromium/canvaskit.wasm");let u=k(m(l,"canvaskit.wasm"),a),d=await import(c);return window.flutterCanvasKit=await d.default({instantiateWasm:u}),window.flutterCanvasKit})(),window.flutterCanvasKitLoaded);var A=async(n,e,s,t)=>{let i=!s.hasImageCodecs||!s.hasChromiumBreakIterators?"skwasm_heavy":e.enableWimp?"wimp":"skwasm",o=m(t,`${i}.js`),l=o;n.flutterTT.policy&&(l=n.flutterTT.policy.createScriptURL(l));let c=k(m(t,`${i}.wasm`),`${i}.wasm`),a=await import(l);return!s.crossOriginIsolated&&!e.forceSingleThreadedSkwasm&&!e.suppressMultithreadingWarning&&console.warn(`Flutter Web: Skwasm uses multi-threading and web workers for better performance, but your page needs to be cross-origin isolated to support multi-threading. Skwasm will run in single-threaded mode.
+To enable multithreading, serve your app with these HTTP response headers:
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+See https://web.dev/articles/coop-coep for guidance.
+To silence this warning, set \`suppressMultithreadingWarning: true\` in your Flutter configuration.`),await a.default({skwasmSingleThreaded:e.enableWimp||!s.crossOriginIsolated||s.isChromeExtension||e.forceSingleThreadedSkwasm,instantiateWasm:c,locateFile:(u,d)=>u.endsWith(".ww.js")?URL.createObjectURL(new Blob([`
+"use strict";
+
+let eventListener;
+eventListener = (message) => {
+    const pendingMessages = [];
+    const data = message.data;
+    data["instantiateWasm"] = (info,receiveInstance) => {
+        const instance = new WebAssembly.Instance(data["wasm"], info);
+        return receiveInstance(instance, data["wasm"])
+    };
+    import(data.js).then(async (skwasm) => {
+        await skwasm.default(data);
+
+        removeEventListener("message", eventListener);
+        for (const message of pendingMessages) {
+            dispatchEvent(message);
+        }
+    });
+    removeEventListener("message", eventListener);
+    eventListener = (message) => {
+
+        pendingMessages.push(message);
+    };
+
+    addEventListener("message", eventListener);
+};
+addEventListener("message", eventListener);
+`],{type:"application/javascript"})):m(t,u),mainScriptUrlOrBlob:o})};var x=h.supportsWasmGC,S=class{async loadEntrypoint(e){let{serviceWorker:s,...t}=e||{},r=new b,i=new y;i.setTrustedTypesPolicy(r.policy),await i.loadServiceWorker(s).catch(l=>{console.warn("Exception while loading service worker:",l)});let o=new v;return o.setTrustedTypesPolicy(r.policy),this.didCreateEngineInitializer=o.didCreateEngineInitializer.bind(o),o.loadEntrypoint(t)}async load({serviceWorkerSettings:e,onEntrypointLoaded:s,nonce:t,config:r}={}){r??={};let i=_flutter.buildConfig;if(!i)throw"FlutterLoader.load requires _flutter.buildConfig to be set";let o=r.wasmAllowList?.[h.browserEngine]??T[h.browserEngine],l=p=>{switch(p){case"skwasm":return x?h.webGLVersion>0?o?null:`Skwasm is disabled by your wasmAllowList configuration for browser engine "${h.browserEngine}".`:"Skwasm requires WebGL support; this browser does not provide it.":"Skwasm requires WasmGC support; this browser does not implement it yet.";default:return null}},c=p=>p.compileTarget==="dart2wasm"&&!x?"dart2wasm requires WasmGC support; this browser does not implement it yet.":r.renderer&&r.renderer!=p.renderer?`The application is configured to use the "${r.renderer}" renderer; this build targets "${p.renderer}".`:l(p.renderer),a,u=[];for(let p of i.builds){let C=c(p);if(C===null){a=p;break}u.push({candidate:p,reason:C})}if(r.verboseBuildSelection)for(let p of u)console.warn(`Flutter Web: build ${p.candidate.compileTarget}/${p.candidate.renderer} was skipped: ${p.reason}`);if(!a)throw console.warn("Flutter Web: no compatible build found for this browser."+(r.verboseBuildSelection?"":" Set `verboseBuildSelection: true` in your Flutter configuration to see why each candidate was rejected.")),new Error("FlutterLoader could not find a build compatible with configuration and environment.");let d={};d.flutterTT=new b,e&&(d.serviceWorkerLoader=new y,d.serviceWorkerLoader.setTrustedTypesPolicy(d.flutterTT.policy),await d.serviceWorkerLoader.loadServiceWorker(e).catch(p=>{console.warn("Exception while loading service worker:",p)}));let w=I(r,i);a.renderer==="canvaskit"?d.canvasKit=P(d,r,h,w):a.renderer==="skwasm"&&(d.skwasm=A(d,r,h,w));let f=new v;return f.setTrustedTypesPolicy(d.flutterTT.policy),this.didCreateEngineInitializer=f.didCreateEngineInitializer.bind(f),f.load(a,d,r,t,s)}};window._flutter||(window._flutter={});window._flutter.loader||(window._flutter.loader=new S);})();
+//# sourceMappingURL=flutter.js.map
+
+if (!window._flutter) {
+  window._flutter = {};
+}
+_flutter.buildConfig = {"engineRevision":"e2149387c63888c6a51c8c3569dacda1c1532653","wasmHashes":{"wimp.wasm":"f0cabf3c514c0b8da2a598660fb2b64c1307cd64daf0378f2fe59b5a9cd04a6a","webparagraph/canvaskit.wasm":"54284ebb7d219fdb72d2c070cad083d6190a323ee6e8224c9b0ae1f617133bbc","skwasm.wasm":"e3c66620cfd56559e2ffd61081b48125caa69d6bc28ff5bc73d89b9d8a9d8155","chromium/canvaskit.wasm":"535555e40b4952664abebc87bcb2b8c31c86e36e836f735dd4e6cd9ff3ddfde8","canvaskit.wasm":"224c2a9e832ecc3072c5e7fac201ced835a151a50c53d488b37bbaf7290350db","skwasm_heavy.wasm":"8c2647525236dd48b6397018497b14d07d8cf6404d6009a2e5b545c7539ef50a"},"builds":[{"compileTarget":"dart2wasm","renderer":"skwasm","mainWasmPath":"main.dart.wasm","jsSupportRuntimePath":"main.dart.mjs"},{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}]};
+
+// index.html に埋め込まれ、ほかの script と同じ場所で動くので、宣言をブロックの中に閉じ込める。
+{
+  // Flutter は Safari(WebKit) を wasm の対象から外しているが、iPhone の実機で skwasm の方が軽かったので WebKit 26 以上だけ許可する。
+  // WebKit 18.2〜18.x は WasmGC を持っていても dart2wasm の Flutter が落ちることがある（WebKit bug 295799）ので外す。
+  // User-Agent では見分けられない（iOS は OS の版を 18_6 等に固定し、アプリに埋め込んだ WKWebView や iOS の Chrome には Version/ が無い）ので、
+  // WebKit 26 で入った CSS anchor positioning を持つかで判定する。iOS のブラウザは中身がすべて端末の WebKit なので、どのアプリから開いても同じ結果になる。
+  // `--wasm` でビルドしたときだけ効く（JS 版だけのビルドでは使われない）
+  const wasmAllowList = { webkit: CSS.supports('anchor-name: --a') };
+
+  // wasm 版は、main.dart.mjs を読み終えてから main.dart.wasm を取りに行く（flutter.js の _loadWasmEntrypoint）。
+  // その待ちをなくすため、ここで先に読み始める。JS 版になるブラウザで無駄に読まないよう、main.dart.mjs は
+  // flutter.js が wasm 版を選ぶ条件（WasmGC・WebGL・wasmAllowList と、その既定値の blink だけ許可）と同じときに読み、
+  // main.dart.wasm はさらに blink のときだけ読む（理由は preloadForFetch のコメント）。
+  const wasmBuild = _flutter.buildConfig.builds.find((build) => build.compileTarget === 'dart2wasm');
+  const browserEngine =
+    navigator.vendor === 'Google Inc.' || navigator.userAgent.includes('Edg/') ? 'blink'
+    : navigator.vendor === 'Apple Computer, Inc.' ? 'webkit'
+    : navigator.vendor === '' && navigator.userAgent.includes('Firefox') ? 'gecko'
+    : 'unknown';
+  // Safari（iOS 26.5 で確認）は as="fetch" の先読みを fetch() に使わず、もう一度取りに行く（main.dart.wasm を 2 回まるごと受信する）。
+  // fetch で読むものの先読みは、fetch() に使われることを確かめた blink のときだけにする
+  const preloadForFetch = (href) => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'fetch';
+    link.crossOrigin = 'anonymous';
+    link.href = href;
+    document.head.append(link);
+  };
+
+  const hasWebGL = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 1;
+    return canvas.getContext('webgl2') != null || canvas.getContext('webgl') != null;
+  };
+  if (
+    wasmBuild &&
+    (wasmAllowList[browserEngine] ?? browserEngine === 'blink') &&
+    WebAssembly.validate(new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 95, 1, 120, 0])) &&
+    hasWebGL()
+  ) {
+    const runtimePreload = document.createElement('link');
+    runtimePreload.rel = 'modulepreload';
+    runtimePreload.href = wasmBuild.jsSupportRuntimePath;
+    document.head.append(runtimePreload);
+    // flutter.js は main.dart.wasm を fetch() で読む
+    if (browserEngine === 'blink') preloadForFetch(wasmBuild.mainWasmPath);
+  }
+
+  // 最初の画面は FontManifest.json のフォントを全部読み終えるまで出ないが、エンジンはアプリ本体を読み終えてからフォントを読み始める。
+  // アプリ本体と並べて読むよう、FontManifest.json とそこに載るフォントを先に読む（一覧は build/web/assets/FontManifest.json と同じにし、エンジンが足す Roboto を加える）。
+  // 一番大きい main.dart.wasm の取得を先に始めるよう、そのあとに置く（HTTP/1.1 の同時接続の上限で wasm が待たされないように）
+  // Roboto は FontManifest.json に無いが、エンジンが既定の書体として必ず足し、同じく読み終えるまで待つ。
+  // URL はエンジンの skwasm_impl/font_collection.dart と canvaskit/fonts.dart の _robotoUrl と同じにする（Flutter を上げて変わったら合わせる。ずれても余分に読むだけ）
+  if (browserEngine === 'blink') {
+    [
+      'assets/FontManifest.json',
+      'assets/packages/dotpict_core/assets/fonts/Murecho.ttf',
+      'assets/packages/dotpict_core/assets/fonts/mg02_bmp8.ttf',
+      'https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2',
+    ].forEach(preloadForFetch);
+  }
+
+  _flutter.loader.load({
+    config: { wasmAllowList },
+  });
+}
+
+  </script>
+<script type="module" src="./gem_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;aace01904bf94736a4ae27154f4fc915&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<p aria-hidden="true" style="position: fixed; bottom: 100%; visibility: hidden; opacity: 0; pointer-events: none; width: auto; height: auto; white-space: nowrap; line-height: 100px; letter-spacing: 100px; word-spacing: 100px; margin: 0px 0px 100px;">flutter typography measurement</p><flt-announcement-host><flt-announcement-polite aria-live="polite" style="position: fixed; overflow: hidden; transform: translate(-99999px, -99999px); width: 1px; height: 1px;"></flt-announcement-polite><flt-announcement-assertive aria-live="assertive" style="position: fixed; overflow: hidden; transform: translate(-99999px, -99999px); width: 1px; height: 1px;"></flt-announcement-assertive></flt-announcement-host><flt-image-picker-inputs id="__image_picker_web-file-input"></flt-image-picker-inputs><flutter-view flt-view-id="0" tabindex="-1" style="position: absolute; inset: 0px; width: 1440px; height: 717px;"><flt-glass-pane><template shadowrootmode="open"><flt-scene-host style="pointer-events: none;"><flt-scene><flt-clip style="width: 100%; height: 100%; transform-origin: 0px 0px 0px; position: absolute; clip-path: rect(0px 1440px 717px 0px); transform: none;"><flt-clip style="width: 100%; height: 100%; transform-origin: 0px 0px 0px; position: absolute; clip-path: rect(0px 1080px 717px 360px); transform: none;"><flt-clip style="width: 100%; height: 100%; transform-origin: 0px 0px 0px; position: absolute; clip-path: rect(0px 720px 673px 0px); transform: matrix(1, 0, 0, 1, 360, 44);"><flt-platform-view-slot style="pointer-events: auto; width: 340.518px; height: 19px; position: absolute; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 16, 583); opacity: 1;"><slot name="flt-pv-slot-2"></slot></flt-platform-view-slot></flt-clip></flt-clip></flt-clip><flt-canvas-container><canvas aria-hidden="true" width="2880" height="1434" style="position: absolute; width: 1440px; height: 717px;"></canvas></flt-canvas-container></flt-scene></flt-scene-host><style id="flt-internals-stylesheet"> flt-scene-host {  font: normal normal 14.0px sans-serif;} flt-semantics input[type=range] {  appearance: none;  -webkit-appearance: none;  width: 100%;  position: absolute;  border: none;  top: 0;  right: 0;  bottom: 0;  left: 0;} input::selection {  background-color: transparent;} textarea::selection {  background-color: transparent;} flt-semantics input, flt-semantics textarea, flt-semantics [contentEditable="true"] {  caret-color: transparent;} .flt-text-editing::placeholder {  opacity: 0;}:focus { outline: rgb(0, 0, 0) none 0px;} .transparentTextEditing:-webkit-autofill, .transparentTextEditing:-webkit-autofill:hover, .transparentTextEditing:-webkit-autofill:focus, .transparentTextEditing:-webkit-autofill:active {  opacity: 0 !important;}</style></template><flt-platform-view id="flt-pv-2" slot="flt-pv-slot-2" aria-hidden="true"><div class="web-selectable-region-context-menu" style="width: 100%; height: 100%;"></div></flt-platform-view></flt-glass-pane><flt-text-editing-host></flt-text-editing-host><flt-semantics-host style="position: absolute; transform-origin: 0px 0px 0px; transform: scale(0.5);"></flt-semantics-host><style id="flt-text-editing-stylesheet">flutter-view flt-scene-host {  font: normal normal 14.0px sans-serif;}flutter-view flt-semantics input[type=range] {  appearance: none;  -webkit-appearance: none;  width: 100%;  position: absolute;  border: none;  top: 0;  right: 0;  bottom: 0;  left: 0;}flutter-view input::selection {  background-color: transparent;}flutter-view textarea::selection {  background-color: transparent;}flutter-view flt-semantics input,flutter-view flt-semantics textarea,flutter-view flt-semantics [contentEditable="true"] {  caret-color: transparent;}flutter-view .flt-text-editing::placeholder {  opacity: 0;}flutter-view:focus { outline: rgb(0, 0, 0) none 0px;}flutter-view .transparentTextEditing:-webkit-autofill,flutter-view .transparentTextEditing:-webkit-autofill:hover,flutter-view .transparentTextEditing:-webkit-autofill:focus,flutter-view .transparentTextEditing:-webkit-autofill:active {  opacity: 0 !important;}</style></flutter-view></body></html>
