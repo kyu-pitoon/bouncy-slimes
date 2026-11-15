@@ -15,7 +15,6 @@ var tiles_to_toggle: Array[ Vector2i] = [
 	Vector2i(5, -6),
 	Vector2i(-4, -16),
 	Vector2i(-3, -16),
-
 ]
 
 var is_flicked: bool = false
