@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const ACCELERATION = 400.0
 const JUMP_VELOCITY = -320.0
+@onready var jump_sound: AudioStreamPlayer = %JumpSound
 
 
 func _physics_process(delta: float) -> void:
@@ -31,6 +32,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_wall():
 		# Reverse the horizontal velocity and apply bounce strength
 		velocity.x = -prev_velocity_x * 0.9
+		jump_sound.play()
 	
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
@@ -44,6 +46,7 @@ func _physics_process(delta: float) -> void:
 
 		if is_floor_hit or is_character_hit:
 			# Only bounce if falling fast enough (prevents micro-bouncing when still)
+			jump_sound.play()
 			if prev_velocity_y > 120:
 				velocity.y = -prev_velocity_y * 0.8
 				break # Exit loop so multiple simultaneous tile hits don't double-trigger
