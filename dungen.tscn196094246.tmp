@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cj4uj4ga2j8l6"]
+
+[ext_resource type="Script" uid="uid://ctafot4shqnm4" path="res://dungen.gd" id="1_0utqh"]
+
+[node name="Dungen" type="Node2D" unique_id=1527450028]
+script = ExtResource("1_0utqh")
