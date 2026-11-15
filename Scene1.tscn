@@ -1614,8 +1614,9 @@ shape = SubResource("RectangleShape2D_ts3x6")
 script = ExtResource("5_ombsg")
 
 [node name="BlueSlime" type="CharacterBody2D" parent="." unique_id=2001945844]
-position = Vector2(17, -88)
+position = Vector2(17, -30)
 script = ExtResource("1_owciy")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BlueSlime" unique_id=1411790854]
 position = Vector2(106, 31)
@@ -1628,8 +1629,9 @@ polygon = PackedVector2Array(100, 24, 111, 24, 115, 33, 113, 36, 99, 36, 97, 32)
 [node name="Camera2D" type="Camera2D" parent="BlueSlime" unique_id=1864752150]
 
 [node name="RedSlime" type="CharacterBody2D" parent="." unique_id=138116000]
-position = Vector2(-126, -90)
+position = Vector2(-117, -30)
 script = ExtResource("7_5xdti")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RedSlime" unique_id=113032126]
 position = Vector2(106, 31)
