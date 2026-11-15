@@ -1,13 +1,76 @@
-[gd_scene format=3 uid="uid://cnd7lpcw1o1mp"]
+[gd_scene format=4 uid="uid://cnd7lpcw1o1mp"]
 
+[ext_resource type="Script" uid="uid://dg5jawmm8u822" path="res://bouncy_slimes.gd" id="1_87thi"]
 [ext_resource type="Script" uid="uid://cc53jiydhoi3g" path="res://character_body_2d.gd" id="1_owciy"]
 [ext_resource type="Texture2D" uid="uid://chrgyp1kb5on3" path="res://Tilesetv3.png" id="2_7fge0"]
+[ext_resource type="Texture2D" uid="uid://44bpouwbamgo" path="res://Slime_Medium_Blue.png" id="3_078j8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lskx"]
+atlas = ExtResource("3_078j8")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn8c5"]
+atlas = ExtResource("3_078j8")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1qqv"]
+atlas = ExtResource("3_078j8")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxpwh"]
+atlas = ExtResource("3_078j8")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2ulb"]
+atlas = ExtResource("3_078j8")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilwe2"]
+atlas = ExtResource("3_078j8")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yqt4"]
+atlas = ExtResource("3_078j8")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw0gr"]
+atlas = ExtResource("3_078j8")
+region = Rect2(96, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_btgci"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lskx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn8c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s1qqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxpwh")
+}],
 "loop": 1,
-"name": &"move",
+"name": &"move_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2ulb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilwe2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yqt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw0gr")
+}],
+"loop": 1,
+"name": &"move_right",
 "speed": 5.0
 }]
 
@@ -44,10 +107,15 @@ texture = ExtResource("2_7fge0")
 14:1/0 = 0
 15:1/0 = 0
 0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:2/0 = 0
 6:2/0 = 0
 7:2/0 = 0
@@ -709,16 +777,24 @@ texture = ExtResource("2_7fge0")
 13:51/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_btgci"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_87thi")
 
 [node name="Node2D" type="Node2D" unique_id=1977166730]
+script = ExtResource("1_87thi")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1748795868]
 script = ExtResource("1_owciy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=664105179]
+position = Vector2(106, 31)
 sprite_frames = SubResource("SpriteFrames_btgci")
-animation = &"move"
+animation = &"move_left"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D" unique_id=2080967062]
+polygon = PackedVector2Array(100, 24, 111, 24, 115, 33, 113, 36, 99, 36, 97, 32)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=688694473]
+position = Vector2(9, 5)
+tile_map_data = PackedByteArray("AAABAAQAAAAAAAIAAAACAAQAAAABAAIAAAADAAQAAAACAAIAAAAEAAQAAAADAAIAAAAFAAQAAAAEAAIAAAAGAAQAAAAAAAIAAAAHAAQAAAABAAIAAAAIAAQAAAACAAIAAAAJAAQAAAADAAIAAAAKAAQAAAAEAAIAAAALAAQAAAAAAAIAAAAMAAQAAAABAAIAAAANAAQAAAACAAIAAAAOAAQAAAADAAIAAAAPAAQAAAAEAAIAAAA=")
 tile_set = SubResource("TileSet_btgci")
