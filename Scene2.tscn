@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bm5p32gs47vaa" path="res://lever-code.gd" id="5_ombsg"]
 [ext_resource type="Texture2D" uid="uid://doshawyuohxf" path="res://Slime_Medium_Red.png" id="6_j8b0s"]
 [ext_resource type="Script" uid="uid://dd27a8j7o4na8" path="res://red_slime.gd" id="7_5xdti"]
+[ext_resource type="Script" uid="uid://bmiofldf1i04l" path="res://gems.gd" id="7_lguwx"]
 [ext_resource type="Texture2D" uid="uid://ddn5xx8xy0lng" path="res://redgem.png" id="7_spcj7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87thi"]
@@ -1599,6 +1600,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vdgof"]
+size = Vector2(14, 14)
+
 [node name="Node2D" type="Node2D" unique_id=1977166730]
 script = ExtResource("5_ombsg")
 
@@ -1629,8 +1633,9 @@ polygon = PackedVector2Array(100, 24, 111, 24, 115, 33, 113, 36, 99, 36, 97, 32)
 [node name="Camera2D" type="Camera2D" parent="BlueSlime" unique_id=1864752150]
 
 [node name="RedSlime" type="CharacterBody2D" parent="." unique_id=138116000]
-position = Vector2(-126, -90)
+position = Vector2(-116, -55)
 script = ExtResource("7_5xdti")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RedSlime" unique_id=113032126]
 position = Vector2(106, 31)
@@ -1640,16 +1645,18 @@ animation = &"move_right_red"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RedSlime" unique_id=117314996]
 polygon = PackedVector2Array(100, 24, 111, 24, 115, 33, 113, 36, 99, 36, 97, 32)
 
-[node name="Camera2D" type="Camera2D" parent="RedSlime" unique_id=247767847]
-
 [node name="Lever" type="Sprite2D" parent="." unique_id=1743286727]
 
-[node name="Gems" type="Area2D" parent="." unique_id=1825564324]
-position = Vector2(0, 56)
+[node name="RedGem" type="Area2D" parent="." unique_id=1825564324]
+position = Vector2(18, 438)
+script = ExtResource("7_lguwx")
+metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Gems" unique_id=466812071]
+[node name="Sprite2D" type="Sprite2D" parent="RedGem" unique_id=466812071]
 position = Vector2(25.000002, -455.99997)
 scale = Vector2(0.08750001, 0.081250004)
 texture = ExtResource("7_spcj7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Gems" unique_id=1695153234]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RedGem" unique_id=1695153234]
+position = Vector2(25, -456)
+shape = SubResource("RectangleShape2D_vdgof")
