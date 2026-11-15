@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Bouncy-slimes"
+run/main_scene="uid://cnd7lpcw1o1mp"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
