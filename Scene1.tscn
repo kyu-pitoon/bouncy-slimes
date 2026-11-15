@@ -1639,3 +1639,5 @@ animation = &"move_right_red"
 polygon = PackedVector2Array(100, 24, 111, 24, 115, 33, 113, 36, 99, 36, 97, 32)
 
 [node name="Camera2D" type="Camera2D" parent="RedSlime" unique_id=247767847]
+
+[connection signal="body_entered" from="LeverArea2D" to="." method="_on_lever_area_2d_body_entered"]
