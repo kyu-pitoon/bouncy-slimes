@@ -1,140 +1,125 @@
 extends Node2D
 
-var p1: CharacterBody2D # Green Slime (WASD)
-var p2: CharacterBody2D # Pink Slime (Arrows)
-var current_level = 1
+var p1: CharacterBody2D # Blue Slime (WASD)
+var p2: CharacterBody2D # Red Slime (Arrow Keys)
+var camera: Camera2D
 
 var p1_score = 0
 var p2_score = 0
-var p1_target_gems = 3
-var p2_target_gems = 3
 
-var p1_at_door = false
-var p2_at_door = false
+var p1_at_top = false
+var p2_at_top = false
 
-# Timer & Score tracking
 var time_elapsed = 0.0
-var final_score = 0
-
-var level_label: Label
-var gem_label: Label
 var timer_label: Label
-var status_label: Label
+var gem_label: Label
+var height_label: Label
 
 # Physics constants
-const GRAVITY = 1150.0
+const GRAVITY = 1100.0
 const MOVE_SPEED = 300.0
-const JUMP_FORCE = -540.0
+const JUMP_FORCE = -520.0
 
 func _ready():
-	load_level(current_level)
+	setup_tower()
 
-func update_ui_text():
-	if gem_label:
-		gem_label.text = "Green Gems: " + str(p1_score) + "/" + str(p1_target_gems) + "  |  Pink Gems: " + str(p2_score) + "/" + str(p2_target_gems)
-
-func load_level(lvl):
+func setup_tower():
 	for child in get_children():
 		child.queue_free()
 		
-	current_level = lvl
 	p1_score = 0
 	p2_score = 0
-	p1_at_door = false
-	p2_at_door = false
+	p1_at_top = false
+	p2_at_top = false
 	time_elapsed = 0.0
-	
-	# 1. Dark Temple Background
+
+	# 1. Background (Tall Vertical Shaft)
 	var bg = ColorRect.new()
-	bg.size = Vector2(1152, 648)
-	bg.color = Color.DARK_SLATE_GRAY
+	bg.size = Vector2(1152, 3000)
+	bg.position = Vector2(0, -2352)
+	bg.color = Color(0.06, 0.06, 0.12)
 	add_child(bg)
+
+	# 2. Camera that tracks players upwards
+	camera = Camera2D.new()
+	camera.position = Vector2(576, 324)
+	camera.zoom = Vector2(1.0, 1.0)
+	add_child(camera)
+	camera.make_current()
+
+	# 3. Canvas Layer for UI (Stays locked on screen while climbing)
+	var canvas = CanvasLayer.new()
+	add_child(canvas)
 	
-	# UI Banners
-	level_label = Label.new()
-	level_label.text = "LEVEL " + str(current_level) + " / 2: TEMPLE SLIME CO-OP"
-	level_label.position = Vector2(30, 20)
-	level_label.add_theme_font_size_override("font_size", 24)
-	level_label.add_theme_color_override("font_color", Color.GOLD)
-	add_child(level_label)
-	
+	timer_label = Label.new()
+	timer_label.position = Vector2(30, 20)
+	timer_label.add_theme_font_size_override("font_size", 22)
+	timer_label.add_theme_color_override("font_color", Color.CYAN)
+	canvas.add_child(timer_label)
+
 	gem_label = Label.new()
 	gem_label.position = Vector2(30, 55)
 	gem_label.add_theme_font_size_override("font_size", 18)
-	gem_label.add_theme_color_override("font_color", Color.WHITE)
-	add_child(gem_label)
-	update_ui_text()
-	
-	timer_label = Label.new()
-	timer_label.position = Vector2(920, 20)
-	timer_label.add_theme_font_size_override("font_size", 24)
-	timer_label.add_theme_color_override("font_color", Color.CYAN)
-	add_child(timer_label)
-	
-	status_label = Label.new()
-	status_label.text = "P1: WASD (Green Slime) | P2: ARROWS (Pink Slime)\nFast time = Higher Score Bonus! Collect ALL gems to unlock doors."
-	status_label.position = Vector2(30, 580)
-	status_label.add_theme_font_size_override("font_size", 15)
-	status_label.add_theme_color_override("font_color", Color.LIGHT_GRAY)
-	add_child(status_label)
+	gem_label.add_theme_color_override("font_color", Color.GOLD)
+	canvas.add_child(gem_label)
+	update_ui()
 
-	# 2. Fireboy & Watergirl Style Temple Platforms
-	create_temple_platform(Vector2(576, 630), Vector2(1152, 36))
+	height_label = Label.new()
+	height_label.position = Vector2(900, 20)
+	height_label.add_theme_font_size_override("font_size", 22)
+	height_label.add_theme_color_override("font_color", Color.GREEN_YELLOW)
+	canvas.add_child(height_label)
+
+	var status = Label.new()
+	status.text = "P1: WASD (Blue Slime) | P2: ARROWS (Red Slime)\nClimb together to the top of the tower!"
+	status.position = Vector2(30, 580)
+	status.add_theme_font_size_override("font_size", 15)
+	status.add_theme_color_override("font_color", Color.LIGHT_GRAY)
+	canvas.add_child(status)
+
+	# 4. Build Tower Architecture
+	create_platform(Vector2(576, 620), Vector2(1152, 40), Color(0.2, 0.2, 0.3))
 	
-	if current_level == 1:
-		p1_target_gems = 3
-		p2_target_gems = 3
-		
-		create_temple_platform(Vector2(250, 490), Vector2(220, 24))
-		create_temple_platform(Vector2(900, 460), Vector2(260, 24))
-		create_temple_platform(Vector2(576, 340), Vector2(280, 24))
-		
-		create_slime_pad(Vector2(576, 610), Vector2(100, 16), -750)
-		
-		create_hazard(Vector2(550, 600), Vector2(120, 24), Color.GREEN, "acid")
-		create_hazard(Vector2(150, 600), Vector2(100, 24), Color.RED, "lava")
-		
-		create_gem(Vector2(250, 430), Color.GREEN, "p1")
-		create_gem(Vector2(900, 400), Color.MAGENTA, "p2")
-		create_gem(Vector2(576, 270), Color.GREEN, "p1")
-		create_gem(Vector2(500, 580), Color.MAGENTA, "p2")
-		create_gem(Vector2(950, 580), Color.GREEN, "p1")
-		create_gem(Vector2(100, 500), Color.MAGENTA, "p2")
-		
-		create_character_door(Vector2(1050, 530), Color.GREEN, "p1")
-		create_character_door(Vector2(980, 530), Color.MAGENTA, "p2")
-		
-	elif current_level == 2:
-		p1_target_gems = 4
-		p2_target_gems = 4
-		
-		create_temple_platform(Vector2(200, 500), Vector2(180, 24))
-		create_temple_platform(Vector2(950, 440), Vector2(220, 24))
-		create_temple_platform(Vector2(576, 380), Vector2(240, 24))
-		create_temple_platform(Vector2(350, 260), Vector2(200, 24))
-		
-		create_slime_pad(Vector2(576, 610), Vector2(120, 16), -800)
-		
-		create_hazard(Vector2(600, 600), Vector2(250, 24), Color.GREEN, "acid")
-		create_hazard(Vector2(200, 600), Vector2(120, 24), Color.RED, "lava")
-		
-		create_gem(Vector2(200, 440), Color.GREEN, "p1")
-		create_gem(Vector2(950, 380), Color.MAGENTA, "p2")
-		create_gem(Vector2(576, 310), Color.GREEN, "p1")
-		create_gem(Vector2(350, 200), Color.MAGENTA, "p2")
-		create_gem(Vector2(1000, 580), Color.GREEN, "p1")
-		create_gem(Vector2(100, 550), Color.MAGENTA, "p2")
-		create_gem(Vector2(500, 550), Color.GREEN, "p1")
-		create_gem(Vector2(700, 550), Color.MAGENTA, "p2")
-		
-		create_character_door(Vector2(1050, 370), Color.GREEN, "p1")
-		create_character_door(Vector2(980, 370), Color.MAGENTA, "p2")
+	# Tower Walls
+	create_platform(Vector2(20, -1000), Vector2(40, 4000), Color(0.15, 0.15, 0.22))
+	create_platform(Vector2(1132, -1000), Vector2(40, 4000), Color(0.15, 0.15, 0.22))
 
-	# 3. Spawn Slimes with Eyes
-	p1 = create_slime_character(Vector2(70, 540), Color.GREEN, "GreenSlime", "acid")
-	p2 = create_slime_character(Vector2(120, 540), Color.MAGENTA, "PinkSlime", "lava")
+	# --- SECTION 1: Lower Climb ---
+	create_platform(Vector2(300, 480), Vector2(250, 22), Color(0.3, 0.25, 0.45))
+	create_platform(Vector2(850, 420), Vector2(250, 22), Color(0.3, 0.25, 0.45))
+	create_gem(Vector2(300, 430), "p1")
+	create_gem(Vector2(850, 370), "p2")
 
-func create_slime_character(pos: Vector2, col: Color, p_name: String, safe_type: String) -> CharacterBody2D:
+	# --- SECTION 2: Mid Climb ---
+	create_platform(Vector2(576, 300), Vector2(200, 22), Color(0.3, 0.25, 0.45))
+	create_slime_pad(Vector2(576, 595), Vector2(100, 16), -750)
+	create_hazard(Vector2(576, 610), Vector2(300, 20), Color.RED, "lava")
+
+	create_platform(Vector2(250, 150), Vector2(200, 22), Color(0.35, 0.3, 0.5))
+	create_platform(Vector2(900, 80), Vector2(200, 22), Color(0.35, 0.3, 0.5))
+	create_gem(Vector2(250, 100), "p1")
+	create_gem(Vector2(900, 30), "p2")
+
+	# --- SECTION 3: High Climb ---
+	create_platform(Vector2(576, -80), Vector2(180, 22), Color(0.4, 0.3, 0.55))
+	create_slime_pad(Vector2(576, 95), Vector2(80, 14), -850)
+
+	create_platform(Vector2(300, -250), Vector2(160, 22), Color(0.4, 0.3, 0.55))
+	create_platform(Vector2(800, -350), Vector2(160, 22), Color.DARK_VIOLET)
+	create_gem(Vector2(300, -300), "p1")
+	create_gem(Vector2(800, -400), "p2")
+
+	# --- SECTION 4: Peak (Summit) ---
+	create_platform(Vector2(576, -550), Vector2(300, 26), Color.REBECCA_PURPLE)
+	
+	create_door(Vector2(516, -610), Color.DODGER_BLUE, "p1")
+	create_door(Vector2(636, -610), Color.CRIMSON, "p2")
+
+	# 5. Spawn Players
+	p1 = create_slime(Vector2(200, 540), Color.DODGER_BLUE, "BlueSlime", "acid")
+	p2 = create_slime(Vector2(300, 540), Color.CRIMSON, "RedSlime", "lava")
+
+func create_slime(pos: Vector2, col: Color, p_name: String, safe_type: String) -> CharacterBody2D:
 	var body = CharacterBody2D.new()
 	body.name = p_name
 	body.position = pos
@@ -142,45 +127,31 @@ func create_slime_character(pos: Vector2, col: Color, p_name: String, safe_type:
 	add_child(body)
 	
 	var rect = ColorRect.new()
-	rect.size = Vector2(40, 36)
-	rect.position = Vector2(-20, -18)
+	rect.size = Vector2(40, 34)
+	rect.position = Vector2(-20, -17)
 	rect.color = col
 	body.add_child(rect)
 	
-	# Left Eye
-	var eye_l = ColorRect.new()
-	eye_l.size = Vector2(8, 10)
-	eye_l.position = Vector2(-12, -12)
-	eye_l.color = Color.WHITE
-	body.add_child(eye_l)
+	var eye1 = ColorRect.new()
+	eye1.size = Vector2(8, 10)
+	eye1.position = Vector2(-12, -12)
+	eye1.color = Color.WHITE
+	body.add_child(eye1)
 	
-	var pupil_l = ColorRect.new()
-	pupil_l.size = Vector2(4, 5)
-	pupil_l.position = Vector2(-10, -10)
-	pupil_l.color = Color.BLACK
-	body.add_child(pupil_l)
-	
-	# Right Eye
-	var eye_r = ColorRect.new()
-	eye_r.size = Vector2(8, 10)
-	eye_r.position = Vector2(4, -12)
-	eye_r.color = Color.WHITE
-	body.add_child(eye_r)
-	
-	var pupil_r = ColorRect.new()
-	pupil_r.size = Vector2(4, 5)
-	pupil_r.position = Vector2(6, -10)
-	pupil_r.color = Color.BLACK
-	body.add_child(pupil_r)
-	
+	var eye2 = ColorRect.new()
+	eye2.size = Vector2(8, 10)
+	eye2.position = Vector2(4, -12)
+	eye2.color = Color.WHITE
+	body.add_child(eye2)
+
 	var cshape = CollisionShape2D.new()
 	var shape = RectangleShape2D.new()
-	shape.size = Vector2(40, 36)
+	shape.size = Vector2(40, 34)
 	cshape.shape = shape
 	body.add_child(cshape)
 	return body
 
-func create_temple_platform(pos: Vector2, size: Vector2):
+func create_platform(pos: Vector2, size: Vector2, col: Color):
 	var wall = StaticBody2D.new()
 	wall.position = pos
 	add_child(wall)
@@ -188,14 +159,8 @@ func create_temple_platform(pos: Vector2, size: Vector2):
 	var rect = ColorRect.new()
 	rect.size = size
 	rect.position = -size / 2
-	rect.color = Color.DARK_VIOLET
+	rect.color = col
 	wall.add_child(rect)
-	
-	var top_line = ColorRect.new()
-	top_line.size = Vector2(size.x, 5)
-	top_line.position = Vector2(-size.x / 2, -size.y / 2)
-	top_line.color = Color.REBECCA_PURPLE
-	wall.add_child(top_line)
 	
 	var cshape = CollisionShape2D.new()
 	var shape = RectangleShape2D.new()
@@ -225,7 +190,7 @@ func create_slime_pad(pos: Vector2, size: Vector2, bounce_power: float):
 			body.velocity.y = bounce_power
 	)
 
-func create_hazard(pos: Vector2, size: Vector2, col: Color, h_type: String):
+func create_hazard(pos: Vector2, size: Vector2, col: Color, _h_type: String):
 	var haz = Area2D.new()
 	haz.position = pos
 	add_child(haz)
@@ -244,13 +209,11 @@ func create_hazard(pos: Vector2, size: Vector2, col: Color, h_type: String):
 	
 	haz.body_entered.connect(func(body):
 		if body is CharacterBody2D:
-			var safe = body.get_meta("safe_hazard")
-			if h_type != safe:
-				body.position = Vector2(70, 540)
-				body.velocity = Vector2.ZERO
+			body.position = Vector2(250, 540)
+			body.velocity = Vector2.ZERO
 	)
 
-func create_gem(pos: Vector2, col: Color, gem_type: String):
+func create_gem(pos: Vector2, gem_type: String):
 	var gem = Area2D.new()
 	gem.position = pos
 	add_child(gem)
@@ -258,7 +221,7 @@ func create_gem(pos: Vector2, col: Color, gem_type: String):
 	var rect = ColorRect.new()
 	rect.size = Vector2(22, 22)
 	rect.position = Vector2(-11, -11)
-	rect.color = col
+	rect.color = Color.DODGER_BLUE if gem_type == "p1" else Color.CRIMSON
 	gem.add_child(rect)
 	
 	var cshape = CollisionShape2D.new()
@@ -271,14 +234,14 @@ func create_gem(pos: Vector2, col: Color, gem_type: String):
 		if body == p1 and gem_type == "p1":
 			p1_score += 1
 			gem.queue_free()
-			update_ui_text()
+			update_ui()
 		elif body == p2 and gem_type == "p2":
 			p2_score += 1
 			gem.queue_free()
-			update_ui_text()
+			update_ui()
 	)
 
-func create_character_door(pos: Vector2, col: Color, door_type: String):
+func create_door(pos: Vector2, col: Color, door_type: String):
 	var door = Area2D.new()
 	door.position = pos
 	add_child(door)
@@ -296,17 +259,14 @@ func create_character_door(pos: Vector2, col: Color, door_type: String):
 	door.add_child(cshape)
 	
 	door.body_entered.connect(func(body):
-		if body == p1 and door_type == "p1" and p1_score >= p1_target_gems:
-			p1_at_door = true
-		elif body == p2 and door_type == "p2" and p2_score >= p2_target_gems:
-			p2_at_door = true
+		if body == p1 and door_type == "p1" and p1_score >= 3:
+			p1_at_top = true
+		elif body == p2 and door_type == "p2" and p2_score >= 3:
+			p2_at_top = true
 	)
-	
 	door.body_exited.connect(func(body):
-		if body == p1 and door_type == "p1":
-			p1_at_door = false
-		elif body == p2 and door_type == "p2":
-			p2_at_door = false
+		if body == p1 and door_type == "p1": p1_at_top = false
+		if body == p2 and door_type == "p2": p2_at_top = false
 	)
 
 func _physics_process(delta):
@@ -316,7 +276,15 @@ func _physics_process(delta):
 	time_elapsed += delta
 	if timer_label:
 		timer_label.text = "Time: " + "%.1f" % time_elapsed + "s"
-		
+
+	# Smooth Camera tracking using explicit float values (-500.0 and 324.0)
+	var midpoint_y = (p1.position.y + p2.position.y) / 2.0
+	camera.position.y = lerp(camera.position.y, float(clamp(midpoint_y, -500.0, 324.0)), delta * 5.0)
+
+	var current_height = max(0, int(540 - (p1.position.y + p2.position.y) / 2))
+	if height_label:
+		height_label.text = "Height: " + str(current_height) + "m"
+
 	# P1 Controls (WASD)
 	var p1_dir = 0
 	if Input.is_key_pressed(KEY_A): p1_dir -= 1
@@ -341,15 +309,13 @@ func _physics_process(delta):
 		p2.velocity.y = JUMP_FORCE
 	p2.move_and_slide()
 
-	if p1_at_door and p2_at_door:
-		var level_score_bonus = max(100, 2000 - int(time_elapsed * 25))
-		final_score += level_score_bonus
-		
-		current_level += 1
-		if current_level > 2:
-			level_label.text = "VICTORY! FINAL SCORE: " + str(final_score)
-			timer_label.text = "COMPLETE!"
-			p1.queue_free()
-			p2.queue_free()
-		else:
-			load_level(current_level)
+	if p1_at_top and p2_at_top:
+		var final_score = max(100, 5000 - int(time_elapsed * 20))
+		if timer_label:
+			timer_label.text = "VICTORY! SCORE: " + str(final_score)
+		p1.queue_free()
+		p2.queue_free()
+
+func update_ui():
+	if gem_label:
+		gem_label.text = "Blue Gems: " + str(p1_score) + "/3  |  Red Gems: " + str(p2_score) + "/3"
