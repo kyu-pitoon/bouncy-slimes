@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var lever_area: Area2D = $LeverArea2D
+@onready var endscreen: Sprite2D = $Sprite2D
 
 var source_id: int = 0
 var lever_off_atlas_coords: Vector2i = Vector2i(4, 49) # the not flicked lever tile
@@ -40,4 +41,4 @@ func flick_lever() -> void:
 	
 func _on_door_area_2d_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		print("You won")
+		endscreen.visible = true
