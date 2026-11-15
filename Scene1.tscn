@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cc53jiydhoi3g" path="res://character_body_2d.gd" id="1_owciy"]
 [ext_resource type="Texture2D" uid="uid://chrgyp1kb5on3" path="res://Tilesetv3.png" id="2_7fge0"]
 [ext_resource type="Texture2D" uid="uid://44bpouwbamgo" path="res://Slime_Medium_Blue.png" id="3_078j8"]
+[ext_resource type="Script" uid="uid://bm5p32gs47vaa" path="res://lever-code.gd" id="5_ombsg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4lskx"]
 atlas = ExtResource("3_078j8")
@@ -1412,10 +1413,8 @@ texture = ExtResource("2_7fge0")
 12:48/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:49/next_alternative_id = 3
 4:49/0 = 0
-4:49/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:49/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:49/0 = 0
-5:49/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:49/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:49/0 = 0
 7:49/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1432,10 +1431,8 @@ texture = ExtResource("2_7fge0")
 13:49/0 = 0
 13:49/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:50/0 = 0
-4:50/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:50/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:50/0 = 0
-5:50/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:50/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:50/0 = 0
 7:50/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1495,3 +1492,4 @@ tile_set = SubResource("TileSet_btgci")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1838280568]
 position = Vector2(-24, -150)
 shape = SubResource("RectangleShape2D_ts3x6")
+script = ExtResource("5_ombsg")
