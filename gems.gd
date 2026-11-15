@@ -11,6 +11,7 @@ func _on_body_entered(body):
 		tile_map_layer.set_cell(Vector2i(1,-23),0,Vector2i(1,32))
 		tile_map_layer.set_cell(Vector2i(0,-24),0,Vector2i(0,31))
 		tile_map_layer.set_cell(Vector2i(1,-24),0,Vector2i(1,31))
+		%DoorCollision2D.disabled = false
 
 func _ready():
 	body_entered.connect(_on_body_entered)
