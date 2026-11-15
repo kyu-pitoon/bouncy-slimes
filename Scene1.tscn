@@ -1608,7 +1608,7 @@ animations = [{
 size = Vector2(14, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1iu0n"]
-size = Vector2(28, 42)
+size = Vector2(27, 41)
 
 [node name="Node2D" type="Node2D" unique_id=1977166730]
 script = ExtResource("5_ombsg")
@@ -1627,7 +1627,7 @@ shape = SubResource("RectangleShape2D_ts3x6")
 script = ExtResource("5_ombsg")
 
 [node name="BlueSlime" type="CharacterBody2D" parent="." unique_id=2001945844]
-position = Vector2(-6, -435)
+position = Vector2(-56, -30)
 script = ExtResource("1_owciy")
 metadata/_edit_group_ = true
 
@@ -1643,7 +1643,7 @@ polygon = PackedVector2Array(100, 24, 111, 24, 115, 33, 113, 36, 99, 36, 97, 32)
 position = Vector2(23, -2)
 
 [node name="RedSlime" type="CharacterBody2D" parent="." unique_id=138116000]
-position = Vector2(-98, -348)
+position = Vector2(14, -30)
 script = ExtResource("7_5xdti")
 metadata/_edit_group_ = true
 
@@ -1696,7 +1696,7 @@ shape = SubResource("RectangleShape2D_0wmgr")
 
 [node name="DoorCollision2D" type="CollisionShape2D" parent="DoorArea2D" unique_id=937122884]
 unique_name_in_owner = true
-position = Vector2(16, -301)
+position = Vector2(16.5, -300.5)
 shape = SubResource("RectangleShape2D_1iu0n")
 disabled = true
 
